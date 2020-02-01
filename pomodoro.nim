@@ -7,7 +7,7 @@ type State = enum
   shortBreak = (1, "short break")
 
 const minutes = [
-  pomodoro: 1,
+  pomodoro: 25,
   shortBreak: 5
 ]
 
