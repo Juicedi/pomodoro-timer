@@ -36,7 +36,7 @@ while running == true:
       maxSeconds = minutes[curState] * 60
       currentSeconds = (minutesLeft * 60) + secondsLeft
       printProgress(maxSeconds - currentSeconds, maxSeconds)
-      cursorUp(stdout)
+      setCursorPos(0, 0)
       sleep(1000)
       if termWidth != terminalWidth():
         termWidth = terminalWidth()
