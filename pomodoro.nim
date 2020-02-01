@@ -44,4 +44,3 @@ while running == true:
         setCursorPos(0, 0)
 
   curState = State((curState.ord + 1) mod 2)
-  echo ""
