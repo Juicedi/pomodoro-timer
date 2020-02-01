@@ -6,9 +6,9 @@ var tWidth: int
 var line: string
 var blocks: int
 
-proc printProgress*(current: int, max: int): void =
+proc printProgress*(currentProgress: int, maxProgress: int): void =
   tWidth = terminalWidth()
-  blocks = int(round((current / max) * tWidth.float()))
+  blocks = int(round((currentProgress / maxProgress) * tWidth.float()))
 
   for a in 0..tWidth - 1:
     if a == 0: line.add("[")
