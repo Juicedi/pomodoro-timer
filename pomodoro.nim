@@ -2,13 +2,17 @@ import terminal
 import os
 import progressbar
 
-const pomodoro = [
-  (minutes: 25, text: "pomodoro"),
-  (minutes: 5, text: "short break")
+type State = enum
+  pomodoro = 0,
+  shortBreak = (1, "short break")
+
+const minutes = [
+  pomodoro: 1,
+  shortBreak: 5
 ]
 
 var running = true
-var arrayIndex: int
+var curState = pomodoro
 var maxSeconds: int
 var currentSeconds: int
 var termWidth = terminalWidth()
@@ -20,16 +24,16 @@ proc twoDigit(number: int): string =
     result = $number
 
 while running == true:
-  echo "press any key to start " & pomodoro[arrayIndex].text
+  echo "press any key to start " & $curState
   discard getch()
   eraseScreen()
   setCursorPos(0, 0)
 
-  for minutesLeft in countdown(pomodoro[arrayIndex].minutes - 1, 0):
+  for minutesLeft in countdown(minutes[curState] - 1, 0):
     for secondsLeft in countdown(59, 0):
       setCursorXPos(0)
       stdout.writeLine(twoDigit(minutesLeft) & ":" & twoDigit(secondsLeft))
-      maxSeconds = pomodoro[arrayIndex].minutes * 60
+      maxSeconds = minutes[curState] * 60
       currentSeconds = (minutesLeft * 60) + secondsLeft
       printProgress(maxSeconds - currentSeconds, maxSeconds)
       cursorUp(stdout)
@@ -39,5 +43,5 @@ while running == true:
         eraseScreen()
         setCursorPos(0, 0)
 
-  arrayIndex = (arrayIndex + 1) mod 2
+  curState = State((curState.ord + 1) mod 2)
   echo ""
