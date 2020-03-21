@@ -1,6 +1,7 @@
 import terminal
 import os
 import progressbar
+import audio
 
 type State = enum
   pomodoro = 0,
@@ -44,3 +45,4 @@ while running == true:
         setCursorPos(0, 0)
 
   curState = State((curState.ord + 1) mod 2)
+  playSound()
