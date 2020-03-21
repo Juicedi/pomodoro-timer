@@ -1,5 +1,4 @@
 import terminal
-import os
 import math
 
 var tWidth: int
